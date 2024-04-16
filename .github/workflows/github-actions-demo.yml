@@ -1,18 +1,25 @@
-name: GitHub Actions Demo
+name: CI
+
 on:
   push:
     branches:
-      - main  
+      - main 
 
 jobs:
-  Explore-GitHub-Actions:
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository code
-        uses: actions/checkout@v4
 
-      - name: Run Python script
-        run: python job.py  
-        
-      - name: Print workflow status
-        run: echo "🍏 This job's status is ${{ job.status }}."
+    steps:
+    - name: Checkout repository code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run tests
+      run: pytest
