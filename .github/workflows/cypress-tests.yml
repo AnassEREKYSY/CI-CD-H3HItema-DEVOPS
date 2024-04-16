@@ -13,5 +13,13 @@ jobs:
     - name: Checkout repository code
       uses: actions/checkout@v2
 
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install Cypress
+      run: npm install cypress --save-dev
+
     - name: Run Cypress tests
       run: npx cypress run
